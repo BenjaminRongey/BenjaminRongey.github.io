@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebApp - Result</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional style to set the background color */
+        body {
+            transition: background-color 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+
+    <main class="content-container">
+        <label for="userInput" class="sr-only">User Input</label>
+
+        <textarea
+            id="userInput"
+            name="userInput"
+            rows="1"
+            readonly
+        ></textarea>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const text = urlParams.get('text');
+            const h = urlParams.get('h');
+            const s = urlParams.get('s');
+            const l = urlParams.get('l');
+
+            const userInputElement = document.getElementById('userInput');
+            const bodyElement = document.querySelector('body');
+
+            if (text) {
+                userInputElement.value = text;
+                // Adjust height to fit content
+                userInputElement.style.height = 'auto';
+                userInputElement.style.height = (userInputElement.scrollHeight) + 'px';
+            }
+
+            if (h && s && l) {
+                bodyElement.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+            }
+        });
+    </script>
+
+</body>
+</html>

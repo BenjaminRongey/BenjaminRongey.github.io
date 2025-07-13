@@ -11,21 +11,55 @@
     <main class="content-container">
         <label for="userInput" class="sr-only">User Input</label>
 
-        <!-- 
+        <!--
         UPDATED: Switched back to a textarea with special attributes for auto-sizing.
         - rows="1" starts it at a single line height.
         - oninput="..." is a small piece of JS that resizes the box on every keystroke.
         -->
-        <textarea 
-            id="userInput" 
-            name="userInput" 
-            rows="1" 
+        <textarea
+            id="userInput"
+            name="userInput"
+            rows="1"
             placeholder="Enter text here"
             oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"
         ></textarea>
 
-        <button type="submit">Submit</button>
+        <button type="submit" id="submitButton">Submit</button>
     </main>
+
+    <script>
+        document.getElementById('submitButton').addEventListener('click', async () => {
+            const userInput = document.getElementById('userInput').value;
+            // IMPORTANT: Replace with your actual Heroku app URL
+            const fastApiUrl = 'https://color-emotions-eee6705867d9.herokuapp.com//analyze';
+
+            try {
+                const response = await fetch(fastApiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: userInput }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`HTTP error! status: ${response.status}, details: ${errorData.detail}`);
+                }
+
+                const data = await response.json();
+                const { h, s, l } = data;
+
+                // Redirect to the result page with the data as query parameters
+                window.location.href = `result.html?text=${encodeURIComponent(userInput)}&h=${h}&s=${s}&l=${l}`;
+
+            } catch (error) {
+                console.error('Error:', error);
+                // Optionally, display an error message to the user
+                alert(`An error occurred: ${error.message}`);
+            }
+        });
+    </script>
 
 </body>
 </html>
