@@ -31,7 +31,7 @@
         document.getElementById('submitButton').addEventListener('click', async () => {
             const userInput = document.getElementById('userInput').value;
             // IMPORTANT: Replace with your actual Heroku app URL
-            const fastApiUrl = 'https://color-emotions-eee6705867d9.herokuapp.com//analyze';
+            const fastApiUrl = 'https://color-emotions-eee6705867d9.herokuapp.com/analyze';
 
             try {
                 const response = await fetch(fastApiUrl, {
