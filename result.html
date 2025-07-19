@@ -10,6 +10,12 @@
         body {
             transition: background-color 0.5s ease;
         }
+        /* Styling for the return link/button container */
+        .return-link {
+            text-decoration: none;
+            display: inline-block; /* Ensures the link takes the button's dimensions */
+            margin-top: 15px; /* Adds space above the button */
+        }
     </style>
 </head>
 <body>
@@ -23,6 +29,12 @@
             rows="1"
             readonly
         ></textarea>
+
+        <!-- === ADDED RETURN BUTTON === -->
+        <a href="index.html" class="return-link">
+            <button type="button">Return</button>
+        </a>
+        <!-- === END OF ADDED CODE === -->
     </main>
 
     <script>
