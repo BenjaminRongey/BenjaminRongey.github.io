@@ -10,19 +10,17 @@
         body {
             transition: background-color 0.5s ease;
         }
-        /* Styling for the return link/button container */
-        .return-link {
-            text-decoration: none;
-            display: inline-block; /* Ensures the link takes the button's dimensions */
-            margin-top: 15px; /* Adds space above the button */
+        /* Add some space between the two text areas */
+        #newUserInput {
+            margin-top: 25px;
         }
     </style>
 </head>
 <body>
 
     <main class="content-container">
-        <label for="userInput" class="sr-only">User Input</label>
-
+        <!-- This textarea shows the text from the PREVIOUS submission -->
+        <label for="userInput" class="sr-only">Previous User Input</label>
         <textarea
             id="userInput"
             name="userInput"
@@ -30,14 +28,25 @@
             readonly
         ></textarea>
 
-        <!-- === ADDED RETURN BUTTON === -->
-        <a href="index.html" class="return-link">
-            <button type="button">Return</button>
-        </a>
-        <!-- === END OF ADDED CODE === -->
+        <!-- === START OF NEWLY ADDED SECTION === -->
+
+        <!-- This is the NEW textarea for the user to try again -->
+        <label for="newUserInput" class="sr-only">New User Input</label>
+        <textarea
+            id="newUserInput"
+            name="newUserInput"
+            rows="1"
+            placeholder="Try again?"
+            oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"
+        ></textarea>
+
+        <button type="submit" id="resubmitButton">Submit</button>
+
+        <!-- === END OF NEWLY ADDED SECTION === -->
     </main>
 
     <script>
+        // --- SCRIPT TO DISPLAY THE INITIAL RESULT ---
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const text = urlParams.get('text');
@@ -57,6 +66,41 @@
 
             if (h && s && l) {
                 bodyElement.style.backgroundColor = `hsl(${h}, ${s}%, ${l}%)`;
+            }
+        });
+
+        // --- SCRIPT TO HANDLE THE NEW SUBMISSION ---
+        document.getElementById('resubmitButton').addEventListener('click', async () => {
+            const userInput = document.getElementById('newUserInput').value;
+            // No need to process if the input is empty
+            if (!userInput.trim()) return;
+
+            const fastApiUrl = 'https://color-emotions-eee6705867d9.herokuapp.com/analyze';
+
+            try {
+                const response = await fetch(fastApiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: userInput }),
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    throw new Error(`HTTP error! status: ${response.status}, details: ${errorData.detail}`);
+                }
+
+                const data = await response.json();
+                const { h, s, l } = data;
+
+                // Reload the result page with the new data as query parameters.
+                // This creates a seamless loop.
+                window.location.href = `result.html?text=${encodeURIComponent(userInput)}&h=${h}&s=${s}&l=${l}`;
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert(`An error occurred: ${error.message}`);
             }
         });
     </script>
