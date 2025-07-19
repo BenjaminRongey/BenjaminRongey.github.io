@@ -4,93 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WebApp - Result</title>
+    <!-- The single source of truth for styles -->
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Additional style to set the background color */
-        body {
-            transition: background-color 0.5s ease;
-        }
-        /* Add some space between the two text areas */
-        #newUserInput {
-            margin-top: 25px;
-        }
-        
-        /* === STYLE FOR THE DYNAMIC BUTTON === */
-        #resubmitButton {
-            /* This transition will smooth the color change on reload */
-            transition: background-color 0.5s ease, color 0.5s ease;
-        }
-        /* Override the default hover effect from style.css for a more subtle one */
-        #resubmitButton:hover {
-            filter: brightness(85%); /* Slightly darken the button on hover */
-            background-color: inherit; /* Prevents style.css from turning it black */
-            color: inherit;
-        }
-    </style>
 </head>
-<body>
+<!-- Add a class to the body to target it with specific styles -->
+<body class="results-page">
+
+    <header class="result-text-container">
+        <h2 id="resultTextDisplay"></h2>
+    </header>
 
     <main class="content-container">
-        <!-- This textarea shows the text from the PREVIOUS submission -->
-        <label for="userInput" class="sr-only">Previous User Input</label>
+        <label for="userInput" class="sr-only">User Input</label>
+
         <textarea
             id="userInput"
             name="userInput"
-            rows="1"
-            readonly
-        ></textarea>
-
-        <!-- This is the NEW textarea for the user to try again -->
-        <label for="newUserInput" class="sr-only">New User Input</label>
-        <textarea
-            id="newUserInput"
-            name="newUserInput"
             rows="1"
             placeholder="Try again?"
             oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"
         ></textarea>
 
-        <button type="submit" id="resubmitButton">Submit</button>
-
+        <button type="submit" id="submitButton">Submit</button>
     </main>
 
     <script>
-        // --- SCRIPT TO DISPLAY THE INITIAL RESULT ---
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const text = urlParams.get('text');
             const h = urlParams.get('h');
             const s = urlParams.get('s');
-            const l = urlParams.get('l'); // Lightness value
+            const l = urlParams.get('l');
 
-            const userInputElement = document.getElementById('userInput');
+            const resultTextElement = document.getElementById('resultTextDisplay');
+            const submitButton = document.getElementById('submitButton');
             const bodyElement = document.querySelector('body');
-            const resubmitButton = document.getElementById('resubmitButton'); // Get the button
 
             if (text) {
-                userInputElement.value = text;
-                userInputElement.style.height = 'auto';
-                userInputElement.style.height = (userInputElement.scrollHeight) + 'px';
+                resultTextElement.textContent = text;
             }
 
-            // === UPDATED LOGIC TO SET COLORS ===
             if (h && s && l) {
                 const hslColor = `hsl(${h}, ${s}%, ${l}%)`;
-                
-                // 1. Set the background color for the page and the button
                 bodyElement.style.backgroundColor = hslColor;
-                resubmitButton.style.backgroundColor = hslColor;
-
-                // 2. Set button text to black or white for readability
-                // If lightness (l) is > 55, the background is light, so use black text.
-                // Otherwise, the background is dark, so use white text.
-                resubmitButton.style.color = l > 55 ? '#000' : '#fff';
+                submitButton.style.backgroundColor = hslColor;
+                submitButton.style.color = l > 55 ? '#000' : '#fff';
             }
         });
 
-        // --- SCRIPT TO HANDLE THE NEW SUBMISSION ---
-        document.getElementById('resubmitButton').addEventListener('click', async () => {
-            const userInput = document.getElementById('newUserInput').value;
+        document.getElementById('submitButton').addEventListener('click', async () => {
+            const userInput = document.getElementById('userInput').value;
             if (!userInput.trim()) return;
 
             const fastApiUrl = 'https://color-emotions-eee6705867d9.herokuapp.com/analyze';
@@ -98,9 +61,7 @@
             try {
                 const response = await fetch(fastApiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: userInput }),
                 });
 
@@ -113,7 +74,6 @@
                 const { h, s, l } = data;
 
                 window.location.href = `result.html?text=${encodeURIComponent(userInput)}&h=${h}&s=${s}&l=${l}`;
-
             } catch (error) {
                 console.error('Error:', error);
                 alert(`An error occurred: ${error.message}`);
