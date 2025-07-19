@@ -32,14 +32,19 @@ body {
     text-align: center;
     color: #fff;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    width: 100%; /* Ensure the header can center its text across the whole screen */
 }
 
-/* --- Page-Specific Layout Adjustments --- */
+/* --- Page-Specific Layout Adjustments (THE FIX IS HERE) --- */
 
-/* This targets the body tag only when it's on the result page */
+/* This rule now correctly styles the results page layout */
 body.results-page {
+    /* 1. Stack the header and main content vertically */
     flex-direction: column;
+    /* 2. Space them out evenly on the vertical axis */
     justify-content: space-evenly;
+    /* 3. Center the entire vertical column in the middle of the horizontal axis */
+    align-items: center;
 }
 
 
