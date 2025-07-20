@@ -101,7 +101,7 @@ button {
     padding: 15px;
     border: none;
     border-radius: 8px;
-    background-color: #fff; /* MODIFIED: Set to match the initial page background */
+    background-color: #fff;
     color: #000;
     font-size: 1.1rem;
     font-weight: bold;
@@ -109,16 +109,13 @@ button {
     transition: background-color 0.2s, color 0.2s, filter 0.2s;
 }
 
+/* MODIFIED: This rule now correctly applies to all buttons, turning them black on hover */
 button:hover {
     background-color: #000;
     color: white;
 }
 
-#submitButton:hover {
-    filter: brightness(85%);
-    background-color: inherit;
-    color: inherit;
-}
+/* REMOVED: The conflicting #submitButton:hover rule has been removed */
 
 
 /* --- Accessibility --- */
