@@ -8,14 +8,13 @@
 </head>
 <body>
 
+    <!-- ADDED: Spinner is here, but hidden by default -->
+    <div id="spinnerContainer" class="spinner-container hidden">
+        <div class="spinner"></div>
+    </div>
+
     <main class="content-container">
         <label for="userInput" class="sr-only">User Input</label>
-
-        <!--
-        UPDATED: Switched back to a textarea with special attributes for auto-sizing.
-        - rows="1" starts it at a single line height.
-        - oninput="..." is a small piece of JS that resizes the box on every keystroke.
-        -->
         <textarea
             id="userInput"
             name="userInput"
@@ -23,22 +22,27 @@
             placeholder="Enter text here"
             oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"
         ></textarea>
-
         <button type="submit" id="submitButton">Submit</button>
     </main>
 
     <script>
-        document.getElementById('submitButton').addEventListener('click', async () => {
+        // Get references to elements
+        const submitButton = document.getElementById('submitButton');
+        const spinnerContainer = document.getElementById('spinnerContainer');
+
+        submitButton.addEventListener('click', async () => {
             const userInput = document.getElementById('userInput').value;
-            // IMPORTANT: Replace with your actual Heroku app URL
+            if (!userInput.trim()) return;
+
             const fastApiUrl = 'https://color-emotions-eee6705867d9.herokuapp.com/analyze';
+
+            // Show spinner before starting the request
+            spinnerContainer.classList.remove('hidden');
 
             try {
                 const response = await fetch(fastApiUrl, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ text: userInput }),
                 });
 
@@ -50,13 +54,14 @@
                 const data = await response.json();
                 const { h, s, l } = data;
 
-                // Redirect to the result page with the data as query parameters
+                // Redirecting to the result page will automatically hide the spinner
                 window.location.href = `result.html?text=${encodeURIComponent(userInput)}&h=${h}&s=${s}&l=${l}`;
 
             } catch (error) {
                 console.error('Error:', error);
-                // Optionally, display an error message to the user
                 alert(`An error occurred: ${error.message}`);
+                // IMPORTANT: Hide spinner on error so the user can try again
+                spinnerContainer.classList.add('hidden');
             }
         });
     </script>

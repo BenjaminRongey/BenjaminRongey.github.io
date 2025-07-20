@@ -35,15 +35,11 @@ body {
     width: 100%; /* Ensure the header can center its text across the whole screen */
 }
 
-/* --- Page-Specific Layout Adjustments (THE FIX IS HERE) --- */
+/* --- Page-Specific Layout Adjustments --- */
 
-/* This rule now correctly styles the results page layout */
 body.results-page {
-    /* 1. Stack the header and main content vertically */
     flex-direction: column;
-    /* 2. Space them out evenly on the vertical axis */
     justify-content: space-evenly;
-    /* 3. Center the entire vertical column in the middle of the horizontal axis */
     align-items: center;
 }
 
@@ -113,13 +109,11 @@ button {
     transition: background-color 0.2s, color 0.2s, filter 0.2s;
 }
 
-/* This is the hover effect for the button on the index page */
 button:hover {
     background-color: #000;
     color: white;
 }
 
-/* This overrides the default hover effect for the dynamic button on the results page */
 #submitButton:hover {
     filter: brightness(85%);
     background-color: inherit;
@@ -138,4 +132,38 @@ button:hover {
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+}
+
+/* --- ADDED FOR LOADING SPINNER --- */
+.spinner-container {
+    position: fixed; /* Sits on top of all other content */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+    z-index: 9999;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.3); /* Light border */
+    border-top-color: #fff; /* White spinner color */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Utility class to hide elements */
+.hidden {
+    display: none !important;
 }
