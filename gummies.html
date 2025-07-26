@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+        /* Optional: Style the iframe to fit nicely on your page */
+        .plotly-graph-iframe {
+            width: 100%;
+            height: 550px; /* You can adjust the height */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Analysis of Fruit Snack Distribution</h1>
+    <p>Here is an interactive boxplot showing the distribution of different fruit snack flavors per pack.</p>
+
+    <!--
+      This iframe will load and display your interactive plot.
+      Make sure the 'src' path points to where you uploaded the file.
+    -->
+    <iframe
+        class="plotly-graph-iframe"
+        src="gummy_graphs/plotly_boxplot.html">
+    </iframe>
+
+    <p>As the data shows, some flavors have a much wider distribution than others.</p>
+
+</body>
+</html>
