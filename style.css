@@ -164,13 +164,17 @@ button:hover {
 
 /* --- Styles for Index Page (index.html) --- */
 
+.project-entry {
+    margin-bottom: 100px; /* Increased space between project groups */
+}
+
 .project-link {
     display: block;
     width: 100%;
     padding: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Space between link and description */
     border-radius: 8px;
-    border: none;
+    border: 2px solid transparent;
     background-color: #000;
     color: #fff;
     font-family: inherit;
@@ -178,10 +182,20 @@ button:hover {
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    transition: box-shadow 0.2s;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 .project-link:hover {
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-    color: #fff;
+    background-color: #fff;
+    color: #000;
+    border-color: #000;
+}
+
+.project-description {
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333; /* Updated to a dark grey */
+    padding: 0 10px;
+    line-height: 1.5;
 }
