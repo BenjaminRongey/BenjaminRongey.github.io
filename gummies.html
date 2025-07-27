@@ -4,39 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gummy Fruit Snack Pack Distribution Analysis</title>
-    <style>
-        /* Optional: Style the iframe to fit nicely on your page */
-        .plotly-graph-iframe {
-            width: 100%;
-            height: 550px; /* You can adjust the height */
-            border: none;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="gummies-page">
 
-    <h1>Analysis of Fruit Snack Distribution</h1>
+    <main class="content-container">
 
-    <h2>Plotly Visualization</h2>
-    <p>Here is an interactive boxplot showing the distribution of different fruit snack flavors per pack, created using Plotly.</p>
+        <h1>Fruit Snack Distribution Analysis</h1>
 
-    <!--
-      This iframe will load and display your interactive plot.
-      Make sure the 'src' path points to where you uploaded the file.
-    -->
-    <iframe
-        class="plotly-graph-iframe"
-        src="gummy_graphs/plotly_boxplot.html">
-    </iframe>
+        <h2>Plotly Visualization</h2>
+        <p>This interactive boxplot shows the distribution of different fruit snack flavors per pack. As the data shows, some flavors have a much wider distribution than others.</p>
 
-    <p>As the data shows, some flavors have a much wider distribution than others.</p>
+        <iframe
+            class="plotly-graph-iframe"
+            src="gummy_graphs/plotly_boxplot.html">
+        </iframe>
 
-    <hr>
+        <hr>
 
-    <h2>Tableau Visualization</h2>
-    <p>Here is the same fruit snack data visualized on the Tableau platform.</p>
+        <h2>Tableau Visualization</h2>
+        <p>Here is the same fruit snack data visualized on the Tableau platform.</p>
 
-    <div class='tableauPlaceholder' id='viz1753581105366' style='position: relative'><noscript><a href='#'><img alt='Fruit Snack Distribution ' src='https://public.tableau.com/static/images/Gu/Gummies-Boxplot/Sheet1/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Gummies-Boxplot/Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Gu/Gummies-Boxplot/Sheet1/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1753581105366');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        <div class='tableauPlaceholder' id='viz1753581105366' style='position: relative'><noscript><a href='#'><img alt='Fruit Snack Distribution ' src='https://public.tableau.com/static/images/Gu/Gummies-Boxplot/Sheet1/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Gummies-Boxplot/Sheet1' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Gu/Gummies-Boxplot/Sheet1/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1753581105366');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+        <a href="index.html" class="project-link">Back to Home</a>
+
+    </main>
 
 </body>
 </html>

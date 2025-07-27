@@ -199,3 +199,54 @@ button:hover {
     padding: 0 10px;
     line-height: 1.5;
 }
+
+/* --- Styles for Gummies Page (gummies.html) --- */
+
+.gummies-page {
+    /* Ensures content starts at the top on this page */
+    align-items: flex-start;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.gummies-page .content-container {
+    max-width: 800px; /* Allow wider content for graphs */
+}
+
+.gummies-page h1, .gummies-page h2 {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.gummies-page p {
+    font-family: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 25px; /* Space between paragraphs */
+}
+
+.gummies-page hr {
+    border: 0;
+    height: 1px;
+    background-color: #ccc;
+    margin: 25px 0;
+}
+
+.plotly-graph-iframe {
+    width: 100%;
+    height: 550px;
+    border: none;
+    margin-bottom: 20px;
+}
+
+.tableauPlaceholder {
+    margin-bottom: 50px; /* Space below the Tableau viz */
+}
+
+/* Final back to home link on gummies page needs bottom margin */
+.gummies-page .project-link {
+    margin-bottom: 50px;
+}
