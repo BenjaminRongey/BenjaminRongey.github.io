@@ -26,5 +26,18 @@
         </div>
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const fastApiUrl = 'https://color-emotions-eee6705867d9.herokuapp.com/warmup';
+
+            fetch(fastApiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+            }).catch(error => {
+                console.error('Warmup request failed:', error);
+            });
+        });
+    </script>
+
 </body>
 </html>
